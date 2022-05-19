@@ -1,0 +1,15 @@
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 13rem;
+  margin-bottom: 1rem;
+}
+
+form > input {
+  width: 9.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.checkboxLabel {
+  padding: 0 0.2rem;
+}
