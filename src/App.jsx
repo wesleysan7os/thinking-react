@@ -16,26 +16,35 @@ export default function App() {
     {category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7"}
   ]);
   const [filteredProducts, setFilteredProducts] = useState(products);
+  const [isFilteredByStock, setisFilteredByStock] = useState(true);
 
-  const handleSearchProduct = (e) => {
-    setFilteredProducts(products => {
-      if (e.target.value) {
-        return products.filter((product) =>
+  function handleSearchProduct(e) {
+    let updateFilteredProducts = products;
+    if (e.target.value) {
+        updateFilteredProducts = products.filter((product) =>
           product.name.toUpperCase().includes(e.target.value.toUpperCase())
         );
-      }
-      return [...products];
-    });
+    }
+    setFilteredProducts(updateFilteredProducts);
   };
 
-  const handleFilterByStock = (e) => {
+  function handleFilterByStock(e) {
+    let updateFilteredProducts = products;
+    setisFilteredByStock(!isFilteredByStock);
 
+    if (isFilteredByStock) {
+      updateFilteredProducts = products.filter(product => product.stocked);
+    }
+    setFilteredProducts(updateFilteredProducts);
   }
 
   return (
-    <div className='App'>
-      <SearchBar searchProduct={handleSearchProduct}/>
-      { console.log(filteredProducts) }
+    <div className="App">
+      <SearchBar
+        searchProduct={handleSearchProduct}
+        filterByStock={handleFilterByStock}
+      />
+      {console.log(filteredProducts, isFilteredByStock)}
       {/* <ProductTable>
         <ProductCategoryRow>
           <ProductRow></ProductRow>
