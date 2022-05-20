@@ -1,14 +1,14 @@
 import './SearchBar.css';
 
-export function SearchBar() {
+export function SearchBar({ searchProduct }) {
   return (
     <form>
-      <input type="text" placeholder="Search..." />
+      <input onChange={searchProduct} type="text" placeholder="Search..." />
       <div>
         <input type="checkbox" id="stock" />
-        <lable for="stock" className="checkboxLabel">
+        <label htmlFor="stock">
           Only show products in stock
-        </lable>
+        </label>
       </div>
     </form>
   );
