@@ -2,14 +2,13 @@ import { useState } from 'react';
 
 import { SearchBar }  from './components/SearchBar/SearchBar';
 import { ProductTable } from './components/ProductTable/ProductTable';
-import { ProductCategoryRow } from './components/ProductCategoryRow/ProductCategoryRow';
-import { ProductRow } from './components/ProductRow/ProductRow';
+
 import './App.css';
 
 export default function App() {
   const [products, setProducts] = useState([
     {category: "Sporting Goods", price: "$49.99", stocked: true, name: "Football"},
-    {category: "Sporting Goods", price: "$9.99", stocked: true, name: "Baseball"},
+    {category: "Sporting Goods", price: "$19.99", stocked: true, name: "Baseball"},
     {category: "Sporting Goods", price: "$29.99", stocked: false, name: "Basketball"},
     {category: "Electronics", price: "$99.99", stocked: true, name: "iPod Touch"},
     {category: "Electronics", price: "$399.99", stocked: false, name: "iPhone 5"},
@@ -17,6 +16,7 @@ export default function App() {
   ]);
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [isFilteredByStock, setisFilteredByStock] = useState(true);
+  const [tableTitle, setTableTitle] = useState(["Name", "Price"]);
 
   function handleSearchProduct(e) {
     let updateFilteredProducts = products;
@@ -28,9 +28,9 @@ export default function App() {
     setFilteredProducts(updateFilteredProducts);
   };
 
-  function handleFilterByStock(e) {
-    let updateFilteredProducts = products;
+  function handleFilterByStock() {
     setisFilteredByStock(!isFilteredByStock);
+    let updateFilteredProducts = products;
 
     if (isFilteredByStock) {
       updateFilteredProducts = products.filter(product => product.stocked);
@@ -40,16 +40,8 @@ export default function App() {
 
   return (
     <div className="App">
-      <SearchBar
-        searchProduct={handleSearchProduct}
-        filterByStock={handleFilterByStock}
-      />
-      {console.log(filteredProducts, isFilteredByStock)}
-      {/* <ProductTable>
-        <ProductCategoryRow>
-          <ProductRow></ProductRow>
-        </ProductCategoryRow>
-      </ProductTable> */}
+      <SearchBar searchProduct={handleSearchProduct} filterByStock={handleFilterByStock} />
+      <ProductTable title={tableTitle} products={filteredProducts}/>
     </div>
   );
 }

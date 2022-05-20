@@ -1,0 +1,8 @@
+.product-category-row {
+  max-width: 13rem;
+  margin-bottom: 0.2rem;
+}
+
+span {
+  font-weight: bold;
+}

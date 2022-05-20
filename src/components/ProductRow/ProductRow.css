@@ -1,0 +1,10 @@
+.product-row {
+  display: flex;
+  justify-content: space-between;
+  width: 8rem;
+  margin: 0.3rem 0;
+}
+
+.product-row span {
+  font-weight: normal;
+}
