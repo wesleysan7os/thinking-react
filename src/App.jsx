@@ -15,7 +15,7 @@ export default function App() {
     {category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7"}
   ]);
   const [filteredProducts, setFilteredProducts] = useState(products);
-  const [isFilteredByStock, setisFilteredByStock] = useState(true);
+  const [isFilteredByStock, setisFilteredByStock] = useState(false);
   const [tableTitle, setTableTitle] = useState(["Name", "Price"]);
 
   function handleSearchProduct(e) {
@@ -28,19 +28,22 @@ export default function App() {
     setFilteredProducts(updateFilteredProducts);
   };
 
-  function handleFilterByStock() {
-    setisFilteredByStock(!isFilteredByStock);
+  function handleFilterByStock(isCheckBoxSelected) {
+    setisFilteredByStock(isCheckBoxSelected);
     let updateFilteredProducts = products;
 
-    if (isFilteredByStock) {
-      updateFilteredProducts = products.filter(product => product.stocked);
+    if (isCheckBoxSelected) {
+      updateFilteredProducts = products.filter((product) => product.stocked);
     }
     setFilteredProducts(updateFilteredProducts);
   }
 
   return (
     <div className="App">
-      <SearchBar searchProduct={handleSearchProduct} filterByStock={handleFilterByStock} />
+      <SearchBar 
+        searchProduct={handleSearchProduct} 
+        filterByStock={() => handleFilterByStock(!isFilteredByStock)} 
+      />
       <ProductTable title={tableTitle} products={filteredProducts}/>
     </div>
   );
