@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { v4 as uuidv4 } from "uuid";
+
 import { ProductCategoryRow } from '../ProductCategoryRow/ProductCategoryRow';
 import './ProductTable.css';
 
@@ -27,6 +29,7 @@ export function ProductTable({ title, products }) {
       {categories &&
         categories.map((category) => (
           <ProductCategoryRow
+            key={uuidv4()}
             category={category}
             products={filterProductByCategory(category)}
           />
